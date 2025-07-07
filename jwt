@@ -1,0 +1,36 @@
+// JWT Secret Generator for .env file
+// Run this script to generate a secure random secret
+
+const crypto = require('crypto');
+
+function generateJWTSecret(length = 64) {
+  return crypto.randomBytes(length).toString('hex');
+}
+
+function generateBase64Secret(length = 64) {
+  return crypto.randomBytes(length).toString('base64');
+}
+
+console.log('='.repeat(50));
+console.log('JWT SECRET GENERATOR');
+console.log('='.repeat(50));
+
+// Generate different types of secrets
+const hexSecret = generateJWTSecret(64);
+const base64Secret = generateBase64Secret(64);
+const strongHexSecret = generateJWTSecret(128);
+
+console.log('\nAdd one of these to your .env file:\n');
+
+console.log('# Standard 64-byte hex secret (recommended)');
+console.log(`JWT_SECRET=${hexSecret}`);
+
+console.log('\n# Base64 encoded secret');
+console.log(`JWT_SECRET=${base64Secret}`);
+
+console.log('\n# Extra strong 128-byte hex secret');
+console.log(`JWT_SECRET=${strongHexSecret}`);
+
+console.log('\n' + '='.repeat(50));
+console.log('Copy one of the JWT_SECRET lines above to your .env file');
+console.log('='.repeat(50));
